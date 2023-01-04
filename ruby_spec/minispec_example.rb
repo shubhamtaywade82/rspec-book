@@ -1,51 +1,53 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 # minispec
-# 
+#
 # Very minimal set of features to support specs like this:
-# 
-# context "Array" do 
+#
+# context "Array" do
 #   specify "should respond to new" do
-#     Array.new.should == [] 
+#     Array.new.should == []
 #   end
 # end
 
-class PositiveSpec 
+class PositiveSpec
   def initialize(obj)
     @obj = obj
   end
 
-  def ==(other) 
-    if @obj != other
-      raise Exception.new("equality expected")
-    end
+  def ==(other)
+    return unless @obj != other
+
+    raise StandardError, 'equality expected'
   end
 end
 
 class NegativeSpec
   def initialize(obj)
-    @obj = obj 
+    @obj = obj
   end
 
   def ==(other)
-    if @obj == other
-      raise Exception.new("inequality expected") 
-    end
+    return unless @obj == other
+
+    raise StandardError, 'inequality expected'
   end
 end
 
 class Object
   def should
-    PositiveSpec.new(self) 
+    PositiveSpec.new(self)
   end
 
-  def should_not 
+  def should_not
     NegativeSpec.new(self)
   end
 end
@@ -53,16 +55,15 @@ end
 def specify(msg)
   print '.'
   begin
-    yield 
+    yield
   rescue Exception => e
-    print msg 
+    print msg
     print " FAILED\n"
-    print e.message 
+    print e.message
     print "\n"
   end
 end
 
-def context(msg)
+def context(_msg)
   yield
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task :run do
   %w[3 4 5].each do |version|
     Dir.chdir(version) do
@@ -6,4 +8,4 @@ task :run do
   end
 end
 
-task :default => :run
+task default: :run

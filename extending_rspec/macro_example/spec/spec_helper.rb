@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 # This file is copied to ~/spec when you run 'ruby script/generate rspec'
 # from the project root directory.
-ENV["RAILS_ENV"] ||= 'test'
-require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
+ENV['RAILS_ENV'] ||= 'test'
+require "#{File.dirname(__FILE__)}/../config/environment" unless defined?(RAILS_ROOT)
 require 'rspec/rails'
 
 module ControllerMacros
@@ -43,6 +45,6 @@ end
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-  config.extend(ControllerMacros, :type => :controller)
+  config.fixture_path = "#{RAILS_ROOT}/spec/fixtures/"
+  config.extend(ControllerMacros, type: :controller)
 end

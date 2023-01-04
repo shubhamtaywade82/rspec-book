@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 class Course
@@ -25,18 +27,18 @@ class Student
 end
 
 describe Course do
-  describe "#register" do
-    context "when course is full" do
-      it "throws :course_full" do
-        course = Course.new(:seats => 20)
+  describe '#register' do
+    context 'when course is full' do
+      it 'throws :course_full' do
+        course = Course.new(seats: 20)
         20.times { course.register Student.new }
         lambda {
           course.register Student.new
         }.should throw_symbol(:course_full)
       end
 
-      it "throws :course_full" do
-        course = Course.new(:seats => 20)
+      it 'throws :course_full' do
+        course = Course.new(seats: 20)
         20.times { course.register Student.new }
         lambda {
           course.register Student.new

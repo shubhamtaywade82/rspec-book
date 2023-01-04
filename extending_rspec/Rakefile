@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task :default do
   # `rspec focused_example.rb -fd > focused_example.out`
   # `rspec focused_group.rb -fd > focused_group.out`

@@ -1,5 +1,7 @@
-#START:simple
+# frozen_string_literal: true
+
+# START:simple
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new
-#END:simple
+# END:simple
