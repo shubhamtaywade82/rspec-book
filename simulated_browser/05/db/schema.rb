@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 # This file is auto-generated from the current state of the database. Instead
@@ -18,28 +20,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101015174811) do
-
-  create_table "genres", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+ActiveRecord::Schema.define(version: 20_101_015_174_811) do
+  create_table 'genres', force: true do |t|
+    t.string   'name'
+    t.datetime 'created_at'
+    t.datetime 'updated_at'
   end
 
-  create_table "genres_movies", :id => false, :force => true do |t|
-    t.integer  "genre_id"
-    t.integer  "movie_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table 'genres_movies', id: false, force: true do |t|
+    t.integer  'genre_id'
+    t.integer  'movie_id'
+    t.datetime 'created_at'
+    t.datetime 'updated_at'
   end
 
-  create_table "movies", :force => true do |t|
-    t.date     "showtime_date"
-    t.time     "showtime_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
-    t.integer  "release_year"
+  create_table 'movies', force: true do |t|
+    t.date     'showtime_date'
+    t.time     'showtime_time'
+    t.datetime 'created_at'
+    t.datetime 'updated_at'
+    t.string   'title'
+    t.integer  'release_year'
   end
-
 end

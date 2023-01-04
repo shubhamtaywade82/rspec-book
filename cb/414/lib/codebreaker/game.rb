@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 module Codebreaker
@@ -20,13 +22,14 @@ module Codebreaker
 
     def guess(guess)
       marker = Marker.new(@secret, guess)
-      @output.puts '+'*marker.exact_match_count +
-                   '-'*marker.number_match_count(guess)
+      @output.puts '+' * marker.exact_match_count +
+                   '-' * marker.number_match_count(guess)
     end
 
     class Marker
       def initialize(secret, guess)
-        @secret, @guess = secret, guess
+        @secret = secret
+        @guess = guess
       end
 
       def exact_match_count
@@ -35,20 +38,19 @@ module Codebreaker
         end
       end
 
-      def number_match_count(guess)
+      def number_match_count(_guess)
         (0..3).inject(0) do |count, index|
           count + (number_match?(@guess, index) ? 1 : 0)
         end
       end
 
-      def exact_match?(guess, index)
+      def exact_match?(_guess, index)
         @guess[index] == @secret[index]
       end
 
-      def number_match?(guess, index)
+      def number_match?(_guess, index)
         @secret.include?(@guess[index]) && !exact_match?(@guess, index)
       end
     end
   end
 end
-

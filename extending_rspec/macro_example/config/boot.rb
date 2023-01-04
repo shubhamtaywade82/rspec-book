@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 # Don't change this file!
@@ -14,10 +16,10 @@ RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
 module Rails
   class << self
     def boot!
-      unless booted?
-        preinitialize
-        pick_boot.run
-      end
+      return if booted?
+
+      preinitialize
+      pick_boot.run
     end
 
     def booted?
@@ -64,19 +66,21 @@ module Rails
     end
 
     def load_rails_gem
-      if version = self.class.gem_version
+      if (version = self.class.gem_version)
         gem 'rails', version
       else
         gem 'rails'
       end
-    rescue Gem::LoadError => load_error
-      $stderr.puts %(Missing the Rails #{version} gem. Please `gem install -v=#{version} rails`, update your RAILS_GEM_VERSION setting in config/environment.rb for the Rails version you do have installed, or comment out RAILS_GEM_VERSION to use the latest version installed.)
+    rescue Gem::LoadError => e
+      warn %(Missing the Rails #{version} gem. Please `gem install -v=#{version} rails`, update your RAILS_GEM_VERSION setting in config/environment.rb for the Rails version you do have installed, or comment out RAILS_GEM_VERSION to use the latest version installed.)
       exit 1
     end
 
     class << self
       def rubygems_version
-        Gem::RubyGemsVersion rescue nil
+        Gem::RubyGemsVersion
+      rescue StandardError
+        nil
       end
 
       def gem_version
@@ -93,23 +97,23 @@ module Rails
         require 'rubygems'
         min_version = '1.3.1'
         unless rubygems_version >= min_version
-          $stderr.puts %Q(Rails requires RubyGems >= #{min_version} (you have #{rubygems_version}). Please `gem update --system` and try again.)
+          warn %(Rails requires RubyGems >= #{min_version} (you have #{rubygems_version}). Please `gem update --system` and try again.)
           exit 1
         end
-
       rescue LoadError
-        $stderr.puts %Q(Rails requires RubyGems >= #{min_version}. Please install RubyGems and try again: http://rubygems.rubyforge.org)
+        warn %(Rails requires RubyGems >= #{min_version}. Please install RubyGems and try again: http://rubygems.rubyforge.org)
         exit 1
       end
 
       def parse_gem_version(text)
-        $1 if text =~ /^[^#]*RAILS_GEM_VERSION\s*=\s*["']([!~<>=]*\s*[\d.]+)["']/
+        ::Regexp.last_match(1) if text =~ /^[^#]*RAILS_GEM_VERSION\s*=\s*["']([!~<>=]*\s*[\d.]+)["']/
       end
 
       private
-        def read_environment_rb
-          File.read("#{RAILS_ROOT}/config/environment.rb")
-        end
+
+      def read_environment_rb
+        File.read("#{RAILS_ROOT}/config/environment.rb")
+      end
     end
   end
 end

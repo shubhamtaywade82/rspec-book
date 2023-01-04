@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task :default do
   `ruby newspaper.rb -fs > newspaper.out`
   `ruby pending_fixed.rb -fs > pending_fixed.out`

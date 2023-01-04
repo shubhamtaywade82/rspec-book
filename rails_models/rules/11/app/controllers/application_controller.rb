@@ -1,20 +1,21 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  rescue_from AccessDenied, :with => :access_denied
+  rescue_from AccessDenied, with: :access_denied
 
-protected
-  
+  protected
+
   def access_denied
-    redirect_to "/401.html"
+    redirect_to '/401.html'
   end
-  
 end

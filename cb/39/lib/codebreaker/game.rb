@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 #---
 # Excerpted from "The RSpec Book",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material, 
+# Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
-# We make no guarantees that this code is fit for any purpose. 
+# We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/achbd for more book information.
 #---
 module Codebreaker
@@ -21,17 +23,13 @@ module Codebreaker
     def guess(guess)
       exact_match_count = 0
       mark = ''
-      (0..3).each do |index|
-        if exact_match?(guess, index)
-          exact_match_count += 1
-        end
+      4.times do |index|
+        exact_match_count += 1 if exact_match?(guess, index)
       end
-      (0..3).each do |index|
-        if number_match?(guess, index)
-          mark << '-'
-        end
+      4.times do |index|
+        mark << '-' if number_match?(guess, index)
       end
-      @output.puts '+'*exact_match_count + mark
+      @output.puts '+' * exact_match_count + mark
     end
 
     def exact_match?(guess, index)
@@ -43,4 +41,3 @@ module Codebreaker
     end
   end
 end
-
